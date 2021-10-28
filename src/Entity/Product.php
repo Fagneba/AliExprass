@@ -70,11 +70,6 @@ class Product
     private $category;
 
     /**
-     * @ORM\OneToMany(targetEntity=RelatedProduct::class, mappedBy="product")
-     */
-    private $relatedProducts;
-
-    /**
      * @ORM\OneToMany(targetEntity=ReviewsProduct::class, mappedBy="product")
      */
     private $reviewsProducts;
@@ -102,7 +97,6 @@ class Product
     public function __construct()
     {
         $this->category = new ArrayCollection();
-        $this->relatedProducts = new ArrayCollection();
         $this->reviewsProducts = new ArrayCollection();
         $this->createdAt = new \DateTimeImmutable();
     }
@@ -240,36 +234,6 @@ class Product
     public function removeCategory(categories $category): self
     {
         $this->category->removeElement($category);
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|RelatedProduct[]
-     */
-    public function getRelatedProducts(): Collection
-    {
-        return $this->relatedProducts;
-    }
-
-    public function addRelatedProduct(RelatedProduct $relatedProduct): self
-    {
-        if (!$this->relatedProducts->contains($relatedProduct)) {
-            $this->relatedProducts[] = $relatedProduct;
-            $relatedProduct->setProduct($this);
-        }
-
-        return $this;
-    }
-
-    public function removeRelatedProduct(RelatedProduct $relatedProduct): self
-    {
-        if ($this->relatedProducts->removeElement($relatedProduct)) {
-            // set the owning side to null (unless already changed)
-            if ($relatedProduct->getProduct() === $this) {
-                $relatedProduct->setProduct(null);
-            }
-        }
 
         return $this;
     }

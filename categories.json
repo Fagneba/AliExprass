@@ -1,0 +1,14 @@
+[
+{"type":"header","version":"4.9.2","comment":"Export to JSON plugin for PHPMyAdmin"},
+{"type":"database","name":"aliexprass"},
+{"type":"table","name":"categories","database":"aliexprass","data":
+[
+{"id":"5","name":"Bonnet","description":"<div>Chapeau d'hiver pour homme et femme.<\/div>","image":"e60e49194562d9e59d8e0504b956131336d1deef.png"},
+{"id":"6","name":"Montre","description":"<div>Montre pour homme et femme.<\/div>","image":"f9d180573603c08e92147c520509c78bf8398acb.png"},
+{"id":"7","name":"Bijou","description":"<div>Bijoux pour femmes.<\/div>","image":"11fff84e5223f5aceedfa04530d9feaffd3ad5a0.png"},
+{"id":"8","name":"Portable","description":"<div>Cellulaire pour tous.<\/div>","image":"a95888162c9fbe9d478a1cdd615b50e0e155dff1.png"},
+{"id":"9","name":"Drone","description":"<div>Drones professionnelles pour tous.<\/div>","image":"45bec37f27b141107407a0a7f368e3f12722085b.png"},
+{"id":"10","name":"Gadget","description":"<div>Gadget pour cuisine.<\/div>","image":"89c3deb4a823586ef1d18e0902c9952e233eeb33.png"}
+]
+}
+]
