@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% for element in cart.products %} {# Desormain ici on a besoin du produt qu'on a dans le cart#}
+                            {% for element in cart.products %} {# Desormain ici on a besoin du produit qu'on a dans le cart#}
                                 <tr>
                                     <td class="product-thumbnail"><a href="#"><img src="/assets/uploads/products/{{element.product.image}}" alt="{{element.product.name}}"></a></td>
                                     <td class="product-name" data-title="Product"><a href="#">{{element.product.name}}</a></td>
@@ -88,7 +88,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <a href="#" class="btn btn-fill-out">Proceed To CheckOut</a>
+                    <a href="{{ path('checkout') }}" class="btn btn-fill-out">Proceed To CheckOut</a>
                 </div>
             </div>
         </div>

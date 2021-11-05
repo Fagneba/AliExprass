@@ -5,7 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Carrier;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 
@@ -22,7 +21,7 @@ class CarrierCrudController extends AbstractCrudController
         return [
             IdField::new('id')->hideOnForm(), //Pour ne pas l'afficher dans le formulaire
             TextField::new('name'),
-            TextEditorField::new('description'),
+            TextField::new('description'),
             MoneyField::new('price')->setCurrency('USD'), //Pour la monaie
         ];
     }

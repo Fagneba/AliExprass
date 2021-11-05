@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CarrierRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Form\EntityType;
 
 /**
  * @ORM\Entity(repositoryClass=CarrierRepository::class)
@@ -112,5 +113,14 @@ class Carrier
         $this->updateAt = $updateAt;
 
         return $this;
+    }
+
+    public function __toString() //Pour l'afficher sous forme de caractère
+    {
+        $result = $this->name."[spr]";  // On affiche le nom du livreur
+        $result .= $this->description."[spr]"; // Sa description
+        $result .= "Price: $".($this->price/100)."[spr]"; //Le prix du livreur
+
+        return $result;
     }
 }

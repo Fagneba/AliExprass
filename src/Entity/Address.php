@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\AddressRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
+use App\Form\EntityType;
 
 /**
  * @ORM\Entity(repositoryClass=AddressRepository::class)
@@ -175,5 +176,20 @@ class Address
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __toString() //Pour l'afficher sous forme de caractère
+    {
+        $result = $this->fullName."[spr]";
+        // Si l'entreprise est definit , on va l'ajouter étant donné qu'elle n'est pas obligatoire
+        if($this->getCompany()){ // Si l'entreprise est définit
+            $result .= $this->company."[spr]";
+        }
+        $result .= $this->address."[spr]";
+        $result .= $this->complement."[spr]";
+        $result .= $this->codePostal." -".$this->city."[spr]";
+        $result .= $this->country."[spr]";
+
+        return $result;
     }
 }

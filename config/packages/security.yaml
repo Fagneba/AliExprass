@@ -47,3 +47,4 @@ security:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/account, roles: ROLE_USER }
         - { path: ^/address, roles: ROLE_USER }
+        - { path: ^/checkout, roles: ROLE_USER }
