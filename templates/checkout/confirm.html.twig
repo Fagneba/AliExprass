@@ -16,14 +16,14 @@
                         <div class="content" id="address">
                             {{ address | replace({'[spr]' : '<br>'}) | raw }}
                             <a href="{{ path('address_edit',{'id': address.id}) }}" class="btn btn-fill-out mt-1">Edit address</a>
-                            <a href="{{ path('checkout') }}" class="btn btn-fill-out mt-1">Change address</a>
+                            <a href="{{ path('checkout_edit') }}" class="btn btn-fill-out mt-1">Change address</a>
                         </div>
                 </div>
                 <div class="heading_s1">
                     <h4>Please, verify Your carrier</h4>
                     <div class="content" id="carrier">
                         {{ carrier | replace({'[spr]' : '<br>'}) | raw }}
-                        <a href="{{ path('checkout') }}" class="btn btn-fill-out mt-1">Change Carrier</a>
+                        <a href="{{ path('checkout_edit') }}" class="btn btn-fill-out mt-1">Change Carrier</a>
                     </div>
                 </div>
                 {% if information %}

@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Form;
+
+use App\Entity\Address;
+use App\Entity\Carrier;
 use App\Form\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

@@ -6,24 +6,22 @@ use App\Entity\Address;
 use App\Form\AddressType;
 use App\Repository\AddressRepository;
 use App\Services\CartServices;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/address")
  */
 class AddressController extends AbstractController
 {
-    /**
-     * @Route("/", name="address_index", methods={"GET"})
-     */
-    public function index(AddressRepository $addressRepository): Response
-    {
-        return $this->render('address/index.html.twig', [
-            'addresses' => $addressRepository->findAll(),
-        ]);
+
+    private $session;
+
+    public function __construct(SessionInterface $session){
+         $this->session = $session;
     }
 
     /**
@@ -66,6 +64,13 @@ class AddressController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+
+            if($this->session->get('checkout_data')){ // Si notre session est definit , cela veut dire qu'on vient de la page confirm
+                $data = $this->session->get('checkout_data');//On va donc chercher à mettre à jour les données qu'on a dans notre session
+                $data['address'] = $address; // On met ici les adresses à jour, c'est à dire les données saisis par les utilisateurs.
+                $this->session->set('checkout_data', $data);
+                return $this->redirectToRoute("checkout_confirm"); // Donc on retourne sur la page confirme
+            }
 
             $this->addFlash('address_message', 'Your address has been edited');
             return $this->redirectToRoute('account', [], Response::HTTP_SEE_OTHER);
