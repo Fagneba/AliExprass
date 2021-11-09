@@ -97,7 +97,7 @@ class CartServices{
         $fullCart['data'] = [
             "quantity_cart" => $quantity_cart,
             "subTotalHT" => $subTotal,
-            "Taxe" => round($subTotal * $this->tva,2),
+            "taxe" => round($subTotal * $this->tva,2),
             "subTotalTTC" => round(($subTotal + ($subTotal * $this->tva)), 2)
         ];
         return $fullCart;
