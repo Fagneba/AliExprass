@@ -2,6 +2,10 @@
 
 {% block title %}Checkout AliExprass!{% endblock %}
 
+{% block scriptStripe %}
+   <script src="https://js.stripe.com/v3/"></script>
+{% endblock scriptStripe %}
+
 {% block body %}
 
 {{ include("partials/title_section.html.twig", {'name':'Checkout'}) }}
@@ -81,7 +85,10 @@
                         <div class="heading_s1">
                             <h4>Payment</h4>
                         </div>
-                        <button type="submit" id="checkout-button" class="btn btn-fill-out btn-block">Paid | ${{ cart.data.subTotalTTC + carrier.price/100 }}</button>
+                        <button type="submit" id="checkout-button" 
+                        class="btn btn-fill-out btn-block">
+                        Paid | ${{ cart.data.subTotalTTC + carrier.price/100 }}
+                        </button>
 
                     </div>
                     
@@ -92,4 +99,34 @@
     </div>
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        var stripe = Stripe('sk_test_51Ju2k8CRBuwdGxzZgD0KNVGyFFM1oq7AMILXAAtssVljmB54juCrVh91zjjRRp7h4aH3QvnORgODBNQ183osQeln00Rugymg5X');
+        var checkoutButton = document.getElementById("checkout-button");
+
+        checkoutButton.addEventListener("click", function(){
+            fetch("/create-checkout-session",{
+                method: "POST",
+            })
+              .then(function(response){
+                  return response.json();
+              })
+              .then(function(session){
+                  return stripe.redirectToCheckout({ sessionId: session.id });
+              })
+              .then(function(result){
+                  //if redirectToCheckout fails due to a browser or network
+                  //error, you should display the localized error message to your
+                  //custpmer using error.message.
+                  if(result.error){
+                      alert(result.error.message);
+                  }
+              })
+              .catch(function(error){
+                  console.error("error:", error)
+              });
+        });
+    </script>
 {% endblock %}

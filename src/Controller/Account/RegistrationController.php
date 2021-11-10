@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Account;
+
 use Symfony\Component\Mailer\Exception\TransportException;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
