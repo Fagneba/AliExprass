@@ -92,7 +92,7 @@ class CheckoutController extends AbstractController
             //On recupère les données qu'on a sur notre pages checkout notamment l'adresse et le transport
             $address = $data['address'];
             $carrier = $data['carrier']; 
-            $information = $data['informations'];
+            $informations = $data['informations'];
 
             //Ici on va sauvegarder le panier
             $cart['checkout'] = $data;
@@ -104,7 +104,7 @@ class CheckoutController extends AbstractController
                 //On met les données récuperées dans notre Template 
                 'address' => $address,
                 'carrier' => $carrier,
-                'informations' => $information,
+                'informations' => $informations,
                 'checkout' => $form->createView()
                 
             ]);

@@ -180,7 +180,7 @@ class Address
 
     public function __toString() //Pour l'afficher sous forme de caractère
     {
-        $result = $this->fullName."[spr]";
+        $result = $this->fullname."[spr]";
         // Si l'entreprise est definit , on va l'ajouter étant donné qu'elle n'est pas obligatoire
         if($this->getCompany()){ // Si l'entreprise est définit
             $result .= $this->company."[spr]";

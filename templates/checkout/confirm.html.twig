@@ -30,7 +30,7 @@
                         <a href="{{ path('checkout_edit') }}" class="btn btn-fill-out mt-1">Change Carrier</a>
                     </div>
                 </div>
-                {% if information %}
+                {% if informations %}
                     <div class="heading_s1">
                         <h4>Please, verify Additional information</h4>
                         <div class="form-group mb-0" id="informations">
@@ -54,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for element in cart.product %}
+                                {% for element in cart.products %}
                                     <tr>
                                         <td> {{ element.product.name }} <span class="product-qty">x {{ element.quantity }}</span></td>
                                         <td>$ {{ element.product.price/100 }}</td>
@@ -68,7 +68,7 @@
                                 </tr>
                                 <tr>
                                     <th>Taxe</th>
-                                    <td class="product-subtotal">${{ cart.data.Taxe }}</td>
+                                    <td class="product-subtotal">${{ cart.data.taxe }}</td>
                                 </tr>
                                 <tr>
                                     <th>Shipping( {{carrier.name}} )</th>
