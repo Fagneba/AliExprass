@@ -5,15 +5,18 @@ use App\Entity\Cart;
 use App\Entity\Order;
 use App\Entity\CartDetails;
 use App\Entity\OrderDetails;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class OrderServices{
 
      private $manager;
+     private $repoProduct;
 
-     public function __construct(EntityManagerInterface $manager)
+     public function __construct(EntityManagerInterface $manager , ProductRepository $repoProduct)
      {
          $this->manager = $manager;
+         $this->repoProduct = $repoProduct;
      }
      
      // Methode qui nous permets de creer une commande qui premt en parametre un panier
@@ -55,6 +58,58 @@ class OrderServices{
         $this->manager->flush();
 
         return $order;
+    }
+
+    public function getLineItems($cart){
+       $cartDetails = $cart->getCartDtails(); // On recupére le detail du panier et on le boucle dans un panier vide
+
+       $line_items = [];
+       foreach($cartDetails as $details){
+           $product = $this->repoProduct->findOneByName($details->getProductName());
+
+           $line_items[] = [
+            'price_data' => [
+                'Currency' => 'usd',
+                'unit_amount' => $product->getPrice(),
+                'product_data' => [
+                    'name' => $product->getName(),
+                    'image' => [$_ENV['YOUR_DOMAIN'].'/uploads/products/'.$product->getImage()],
+                ],
+            ],
+            'quantity' => $details->getQuantity(),
+           
+        ];
+       }
+
+       //Carrier
+       $line_items[] = [
+        'price_data' => [
+            'Currency' => 'usd',
+            'unit_amount' => $cart->getCarrierPrice()*100,
+            'product_data' => [
+                'name' => 'Carrier ('.$cart->getCarrierName().')',
+                'image' => [$_ENV['YOUR_DOMAIN'].'/uploads/products/'],
+            ],
+        ],
+        'quantity' => 1,
+       
+    ];
+
+     //Taxe
+     $line_items[] = [
+        'price_data' => [
+            'Currency' => 'usd',
+            'unit_amount' => $cart->getTaxe()*100,
+            'product_data' => [
+                'name' => 'TVA (20%)',
+                'image' => [$_ENV['YOUR_DOMAIN'].'/uploads/products/'],
+            ],
+        ],
+        'quantity' => 1,
+       
+    ];
+
+       return $line_items;
     }
 
      //Cette methode nous permet de sauvegarder un panier  en base de Donnée pour nos equipe de marcheting qui pourra le contacter après
