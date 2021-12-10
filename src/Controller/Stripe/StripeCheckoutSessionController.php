@@ -27,7 +27,7 @@ class StripeCheckoutSessionController extends AbstractController
         //Si on recupère le panier alors on continue
         $order = $orderServices->createOrder($cart); //Nous alllons enregistrer la commande
 
-        Stripe::setApiKey('sk_test_51Ju2k8CRBuwdGxzZgD0KNVGyFFM1oq7AMILXAAtssVljmB54juCrVh91zjjRRp7h4aH3QvnORgODBNQ183osQeln00Rugymg5X');
+        Stripe::setApiKey('pk_test_51Ju2k8CRBuwdGxzZS77vfODp0QiM7iJ244ItQxjOg7QOwtQL0eDGjET8wnQax9CkQIrJyVyyVix0C9h32PyZ5y0K00JHwICaws');
 
         $checkout_session = Session::create([
             'customer_email' => $user->getEmail(),
